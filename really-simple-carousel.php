@@ -42,9 +42,8 @@ class Really_Simple_Carousel {
 	 * enqueue_scripts
 	 */
 	function enqueue_scripts() {
-		wp_enqueue_style( 'really-simple-carousel-css', plugins_url('/style.css', __FILE__) );
-		wp_enqueue_script( 'sly-script', plugins_url('/js/sly.min.js', __FILE__), array('jquery'), '1.0');
-		wp_enqueue_script( 'really-simple-carousel-frontend', plugins_url('/js/frontend.js', __FILE__), array('sly-script'), '1.0');
+		wp_enqueue_style( 'really-simple-carousel-css', plugins_url('/style.css', __FILE__), array( 'dashicons' ) );
+		wp_enqueue_script( 'really-simple-carousel-frontend', plugins_url('/js/frontend.js', __FILE__), array( 'jquery' ), '1.0');
 	}
 
 
@@ -52,9 +51,9 @@ class Really_Simple_Carousel {
 	 * admin_enqueue_scripts
 	 */
 	function admin_enqueue_scripts() {
-		wp_enqueue_style( 'gallery-css', plugins_url('/css/carousel-gallery.css', __FILE__) );
 		wp_enqueue_media();
-		wp_enqueue_script( 'gallery-script', plugins_url('/js/carousel-gallery.js', __FILE__), array('jquery'), '1.0', true );
+		wp_enqueue_style( 'gallery-css', plugins_url('/css/carousel-gallery.css', __FILE__) );
+		wp_enqueue_script( 'gallery-script', plugins_url('/js/carousel-gallery.js', __FILE__), array( 'jquery' ), '1.0', true );
 	}
 
 	
@@ -320,6 +319,8 @@ class Really_Simple_Carousel {
 				
 			$html .= '</ul>
 					</div>
+					<div class="carousel-arrow left"></div>
+					<div class="carousel-arrow right"></div>
 					<div class="carousel-caption">' . wpautop( $carousel_caption ) . '</div>
 					</div>
 					<!-- End Carousel Shortcode -->';

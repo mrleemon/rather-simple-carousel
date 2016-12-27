@@ -1,5 +1,6 @@
 .carousel {
 	margin-bottom: 2em;
+	position: relative;
 }
 
 .carousel-frame {
@@ -9,6 +10,29 @@
 	position: relative;
 	overflow-x: scroll;
 	white-space: nowrap;
+}
+
+.carousel-frame::-webkit-scrollbar {
+    height: 8px;
+	width: 8px;
+}
+
+.carousel-frame::-webkit-scrollbar-track {
+	-webkit-border-image: none !important;
+	-webkit-border-radius: 0;
+	background: #fff;
+}
+
+.carousel-frame::-webkit-scrollbar-thumb {
+	-webkit-border-image: none !important;
+	-webkit-border-radius: 0;
+	background: #ddd;
+}
+
+.carousel-frame::-webkit-scrollbar-button {
+	height: 8px;
+	width: 8px;
+	background: #ddd;
 }
 
 .carousel-frame ul {
@@ -30,7 +54,51 @@
     max-width: none;
 }
 
-.carousel-caption {
+.carousel .carousel-caption {
 	font-size: 80%;
-	font-style: italic;
+}
+
+.carousel .carousel-arrow {
+	cursor: pointer;
+	opacity: 0;
+	position: absolute;
+	top: 45%;
+	width: 4em;
+	height: 4em;
+	background: rgba(100, 100, 100, 0.3);
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.carousel:hover .carousel-arrow {
+	opacity: 1;
+}
+
+.carousel .carousel-arrow.left {
+	left: 0.5em;
+}
+
+.carousel .carousel-arrow.right {
+	right: 0.5em;
+}
+
+.carousel .carousel-arrow:before {
+	color: #fff;
+	display: inline-block;
+	font-family: "dashicons";
+	font-size: 4em;
+	height: 100%;
+	line-height: 1;
+	text-align: center;
+}
+
+.carousel .carousel-arrow.left:before {
+	content: "\f141";
+}
+
+.carousel .carousel-arrow.right:before {
+	content: "\f139";
 }
