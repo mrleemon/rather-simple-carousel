@@ -1,36 +1,49 @@
 jQuery( function( $ ) {
 
-	// click to scroll to specific images
-	/*$( '.carousel-frame .carousel-item' ).on( 'click', function(e) {
-		var container = $(this).parent().parent();
-		var slideWidth = $(this).width();
-		var frameWidth = container.width() / 2;
+	$.fn.horizontal_carousel = function( options ) {
+	
+		var settings = $.extend({
+			speed: 600
+        }, options );
 		
-		var slidePosition = $(this).position().left;
-		var offset = container.scrollLeft() + slidePosition - frameWidth + slideWidth / 2;
-		container.animate({
-			scrollLeft: offset
-		}, 500);
-		e.preventDefault();
-	});*/
+		var b = false;
+		var speed = settings.speed;
+		var container = $( this ).find( '.carousel-frame' );
+		var arrow_left = $( this ).find( '.carousel-arrow.left' );
+		var arrow_right = $( this ).find( '.carousel-arrow.right' );
+		
+		arrow_left.on( 'mousemove', function( e ) {
+			var direction = function() {
+				container.animate( {scrollLeft: '-=' + speed}, 1000, 'linear', direction );
+			}
+			if ( b == false ) {
+				b = true;
+				container.stop( true ).animate( {scrollLeft: '-=' + speed}, 1000, 'linear', direction );
+			}
+		}).on( 'mouseleave', function() {
+			container.stop( true );
+			b = false;
+		});
 
-	// scroll on hover
-	$( '.carousel-frame ul' ).mousemove( function(e) {
-		var container = $(this).parent();
-		if ((e.pageX - container.offset().left) < container.width() / 2) {
+		arrow_right.on( 'mousemove', function( e ) {
 			var direction = function() {
-				container.animate({scrollLeft: '-=600'}, 1000, 'linear', direction);
+				container.animate( {scrollLeft: '+=' + speed}, 1000, 'linear', direction );
 			}
-			container.stop().animate({scrollLeft: '-=600'}, 1000, 'linear', direction);
-		} else {
-			var direction = function() {
-				container.animate({scrollLeft: '+=600'}, 1000, 'linear', direction);
+			if ( b == false ) {
+				b = true;
+				container.stop( true ).animate( {scrollLeft: '+=' + speed}, 1000, 'linear', direction );
 			}
-			container.stop().animate({scrollLeft: '+=600'}, 1000, 'linear', direction);
-		}
-	}).mouseleave( function() {
-		var container = $(this).parent();
-		container.stop();
+		}).on( 'mouseleave', function() {
+			container.stop( true );
+			b = false;
+		});
+	
+	}
+	
+	$( '.carousel' ).each( function() {
+		$( this ).horizontal_carousel({
+			speed: 500
+		});
 	});
 	
 });
