@@ -244,21 +244,10 @@ class ReallySimpleCarousel {
 										<li><a href="#" class="delete tips" data-tip="' . esc_attr__( 'Delete item', 'really-simple-carousel' ) . '">' . __( 'Delete', 'really-simple-carousel' ) . '</a></li>
 									</ul>
 								</li>';
-							} else {
-								$attachment = '<div class="icon"></div>';
-								echo '<li class="image" data-attachment_id="' . esc_attr( $attachment_id ) . '">
-									' . $attachment . '
-									<div class="filename">
-										<div>' . get_the_title( $attachment_id ) . '</div>
-									</div>
-									<ul class="actions">
-										<li><a href="#" class="delete tips" data-tip="' . esc_attr__( 'Delete item', 'really-simple-carousel' ) . '">' . __( 'Delete', 'really-simple-carousel' ) . '</a></li>
-									</ul>
-								</li>';
+								// rebuild ids to be saved
+								$updated_gallery_ids[] = $attachment_id;
 							}
 
-							// rebuild ids to be saved
-							$updated_gallery_ids[] = $attachment_id;
 						}
 
 						// need to update carousel meta to set new gallery ids
@@ -269,11 +258,11 @@ class ReallySimpleCarousel {
 				?>
 			</ul>
 
-			<input type="hidden" id="carousel_items" name="carousel_items" value="<?php echo esc_attr( $carousel_items ); ?>" />
+			<input type="hidden" id="carousel_items" name="carousel_items" value="<?php echo esc_attr( implode( ',', $updated_gallery_ids ) ); ?>" />
 
 		</div>
 		<p class="add_carousel_images hide-if-no-js">
-			<a href="#" data-choose="<?php esc_attr_e( 'Add items to carousel', 'really-simple-carousel' ); ?>" data-update="<?php esc_attr_e( 'Add to carousel', 'really-simple-carousel' ); ?>" data-delete="<?php esc_attr_e( 'Delete item', 'really-simple-carousel' ); ?>" data-text="<?php esc_attr_e( 'Delete', 'really-simple-carousel' ); ?>"><?php _e( 'Add carousel items', 'really-simple-carousel' ); ?></a>
+			<a href="#" data-choose="<?php esc_attr_e( 'Add items to carousel', 'really-simple-carousel' ); ?>"><?php _e( 'Add carousel items', 'really-simple-carousel' ); ?></a>
 		</p>
 		<?php
 	}
