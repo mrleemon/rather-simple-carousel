@@ -330,8 +330,8 @@ class ReallySimpleCarousel {
 	/**
 	 * shortcode_carousel
 	 */
-	function shortcode_carousel( $atts ) {
-		$html = $this->shortcode_atts( $atts );
+	function shortcode_carousel( $attr ) {
+		$html = $this->shortcode_atts( $attr );
 		return $html;
 	}
 
@@ -339,45 +339,53 @@ class ReallySimpleCarousel {
 	/**
 	 * shortcode_atts
 	 */
-	function shortcode_atts( $atts ) {
-		global $post;
-		
-		extract( shortcode_atts( array(
+	function shortcode_atts( $attr ) {
+		$atts = shortcode_atts( array(
 			'id' => ''
-		), $atts ) );
+		), $attr, 'carousel' );
 		
-		$carousel_max_height = ( get_post_meta( $id, '_rsc_carousel_max_height', true ) ) ? get_post_meta( $id, '_rsc_carousel_max_height', true ) : '300';
-		$carousel_items = get_post_meta( $id, '_rsc_carousel_items', true );
-		$carousel_caption = ( get_post_meta( $id, '_rsc_carousel_caption', true ) ) ? get_post_meta( $id, '_rsc_carousel_caption', true ) : '';
+		$id = $atts['id'];
+
+		$html = '';
 		
-		$attachments = array_filter( explode( ',', $carousel_items ) );
-		if ( ! empty( $attachments ) ) {
+		if ( 'carousel' === get_post_type( $id ) ) {
 
-			$html = '<div id="carousel-' . esc_attr( $id ) . '" class="carousel">
-					<div class="carousel-wrapper">
-					<div class="carousel-frame">
-					<div class="carousel-items">';
+			$carousel_max_height = ( get_post_meta( $id, '_rsc_carousel_max_height', true ) ) ? get_post_meta( $id, '_rsc_carousel_max_height', true ) : '300';
+			$carousel_items = get_post_meta( $id, '_rsc_carousel_items', true );
+			$carousel_caption = ( get_post_meta( $id, '_rsc_carousel_caption', true ) ) ? get_post_meta( $id, '_rsc_carousel_caption', true ) : '';
+			
+			$attachments = array_filter( explode( ',', $carousel_items ) );
+			if ( ! empty( $attachments ) ) {
 
-			foreach ( $attachments as $attachment_id ) {
-				if ( wp_attachment_is_image( $attachment_id ) ) {
-					$attachment = wp_get_attachment_image_src( $attachment_id, 'full' );
-					$html .= '<div class="carousel-item"><img src="' . $attachment[0] . '" style="max-height: ' . $carousel_max_height . 'px;" /></div>';
+				$html .= '<div id="carousel-' . esc_attr( $id ) . '" class="carousel">
+						<div class="carousel-wrapper">
+						<div class="carousel-frame">
+						<div class="carousel-items">';
+
+				foreach ( $attachments as $attachment_id ) {
+					if ( wp_attachment_is_image( $attachment_id ) ) {
+						$attachment = wp_get_attachment_image_src( $attachment_id, 'full' );
+						$html .= '<div class="carousel-item"><img src="' . $attachment[0] . '" style="max-height: ' . $carousel_max_height . 'px;" /></div>';
+					}
 				}
-			}
+					
+				$html .= '</div>
+						</div>
+	  				    <div class="carousel-arrow left"></div>
+						<div class="carousel-arrow right"></div>
+						</div>
+						<div class="carousel-caption">' . wpautop( $carousel_caption ) . '</div>';
 				
-			$html .= '</div>
-					</div>
-  				    <div class="carousel-arrow left"></div>
-					<div class="carousel-arrow right"></div>
-					</div>
-					<div class="carousel-caption">' . wpautop( $carousel_caption ) . '</div>';
-			
-			if ( current_user_can( 'edit_post', $post->ID ) ) {
-				$html .= '<div class="carousel-edit-link"><a href="' . esc_url( get_edit_post_link( $id ) ) . '">' . __( 'Edit' ) . '</a></div>';
+				if ( current_user_can( 'edit_post', $id ) ) {
+					$html .= '<div class="carousel-edit-link"><a href="' . esc_url( get_edit_post_link( $id ) ) . '">' . __( 'Edit' ) . '</a></div>';
+				}
+				
+				$html .= '</div>';
+
 			}
-			
-			$html .= '</div>';
+
 		}
+
 		return $html;
 	}
 	
