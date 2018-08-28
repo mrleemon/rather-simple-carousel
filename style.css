@@ -1,56 +1,56 @@
 .carousel {
-	margin-bottom: 2em;
-	position: relative;
+    margin-bottom: 2em;
+    position: relative;
 }
 
 .carousel-wrapper {
-	position: relative;
+    position: relative;
 }
 
 .carousel-frame {
-	width: 100%;
-	height: 100%;
-	margin-bottom: 5px;
-	padding-bottom: 15px;
-	position: relative;
-	overflow-x: scroll;
-	white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 5px;
+    padding-bottom: 15px;
+    position: relative;
+    overflow-x: scroll;
+    white-space: nowrap;
 }
 
 .carousel-frame::-webkit-scrollbar {
     height: 8px;
-	width: 8px;
+    width: 8px;
 }
 
 .carousel-frame::-webkit-scrollbar-track {
-	-webkit-border-image: none !important;
-	-webkit-border-radius: 0;
-	background: #fff;
+    -webkit-border-image: none !important;
+    -webkit-border-radius: 0;
+    background: #fff;
 }
 
 .carousel-frame::-webkit-scrollbar-thumb {
-	-webkit-border-image: none !important;
-	-webkit-border-radius: 0;
-	background: #ddd;
+    -webkit-border-image: none !important;
+    -webkit-border-radius: 0;
+    background: #ddd;
 }
 
 .carousel-frame::-webkit-scrollbar-button {
-	height: 8px;
-	width: 8px;
-	background: #ddd;
+    height: 8px;
+    width: 8px;
+    background: #ddd;
 }
 
 .carousel-frame .carousel-items {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    list-style: none;
 }
 
 .carousel-frame .carousel-item {
-	display: inline-block;
-	margin: 0 5px 0 0;
-	padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    padding: 0;
 }
 
 .carousel-frame .carousel-item img {
@@ -59,52 +59,52 @@
 }
 
 .carousel .carousel-arrow {
-	cursor: pointer;
-	opacity: 0;
-	position: absolute;
-	top: 0;
-	height: calc(100% - 30px);
-	width: 30%;
-	-webkit-transition: all 0.3s ease-out;
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    height: calc(100% - 30px);
+    width: 30%;
+    -webkit-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
 }
 
 .carousel:hover .carousel-arrow {
-	opacity: 1;
+    opacity: 1;
 }
 
 .carousel .carousel-arrow.left {
-	left: 0;
+    left: 0;
 }
 
 .carousel .carousel-arrow.right {
-	right: 0;
+    right: 0;
 }
 
 .carousel .carousel-arrow:before {
-	position: absolute;
-	color: #fff;
-	display: inline-block;
-	font-family: "dashicons";
-	font-size: 50px;
-	top: 45%;
-	width: 55px;
-	height: 55px;
-	line-height: 1.1;
-	text-align: center;
-	background: rgba(100, 100, 100, 0.3);
+    position: absolute;
+    color: #fff;
+    display: inline-block;
+    font-family: "dashicons";
+    font-size: 50px;
+    top: 45%;
+    width: 55px;
+    height: 55px;
+    line-height: 1.1;
+    text-align: center;
+    background: rgba(100, 100, 100, 0.3);
 }
 
 .carousel .carousel-arrow.left:before {
-	content: "\f141";
-	left: 0.5em;
+    content: "\f141";
+    left: 0.5em;
 }
 
 .carousel .carousel-arrow.right:before {
-	content: "\f139";
-	right: 0.5em;
+    content: "\f139";
+    right: 0.5em;
 }
 
 .carousel .carousel-caption {
-	font-size: 80%;
+    font-size: 80%;
 }
