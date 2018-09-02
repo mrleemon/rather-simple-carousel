@@ -106,5 +106,7 @@
 }
 
 .carousel .carousel-caption {
+    margin: 0.5em 0;
     font-size: 11px;
+    line-height: 1.5;
 }
