@@ -99,7 +99,7 @@ class ReallySimpleCarousel {
      */
     function enqueue_scripts() {
         wp_enqueue_style( 'really-simple-carousel-css', plugins_url( '/style.css', __FILE__), array( 'dashicons' ) );
-        wp_enqueue_script( 'really-simple-carousel-frontend', plugins_url( '/js/frontend.js', __FILE__), array( 'jquery' ), '1.0' );
+        wp_enqueue_script( 'really-simple-carousel-frontend', plugins_url( '/assets/js/frontend.js', __FILE__), array( 'jquery' ), false );
     }
 
 
@@ -108,10 +108,9 @@ class ReallySimpleCarousel {
      */
     function admin_enqueue_scripts() {
         wp_enqueue_media();
-        wp_enqueue_style( 'gallery-css', plugins_url( '/css/carousel-gallery.css', __FILE__) );
-        wp_enqueue_script( 'gallery-script', plugins_url( '/js/carousel-gallery.js', __FILE__), array( 'jquery' ), '1.0', true );
+        wp_enqueue_style( 'gallery-css', plugins_url( '/assets/css/carousel-gallery.css', __FILE__) );
+        wp_enqueue_script( 'gallery-script', plugins_url( '/assets/js/carousel-gallery.js', __FILE__), array( 'jquery' ), false, true );
     }
-
     
     
     /*
@@ -157,7 +156,6 @@ class ReallySimpleCarousel {
     /*
     * add_carousel_meta_boxes
     */
-
     function add_carousel_meta_boxes() {
         add_meta_box( 'carousel-shortcode', __( 'Shortcode', 'really-simple-carousel' ), array( $this , 'carousel_shortcode_meta_box' ), 'carousel', 'side', 'low' );
         add_meta_box( 'carousel-dimensions', __( 'Dimensions', 'really-simple-carousel' ), array( $this , 'carousel_dimensions_meta_box' ), 'carousel', 'side', 'low' );
@@ -169,7 +167,6 @@ class ReallySimpleCarousel {
     /*
     * carousel_shortcode_meta_box
     */
-  
     function carousel_shortcode_meta_box() {
         global $post;
         $shortcode = '[carousel id="' . $post->ID . '"]';
@@ -188,7 +185,6 @@ class ReallySimpleCarousel {
     /*
     * carousel_dimensions_meta_box
     */
-  
     function carousel_dimensions_meta_box() {
         global $post;
         $carousel_max_height = ( get_post_meta( $post->ID, '_rsc_carousel_max_height', true ) ) ? get_post_meta( $post->ID, '_rsc_carousel_max_height', true ) : '300';
@@ -207,12 +203,11 @@ class ReallySimpleCarousel {
     /*
     * carousel_items_meta_box
     */
-  
     function carousel_items_meta_box() {
         global $post;
         
     ?>
-            <div id="carousel_images_container">
+        <div id="carousel_images_container">
             <ul class="carousel_images">
                 <?php
                     if ( metadata_exists( 'post', $post->ID, '_rsc_carousel_items' ) ) {
@@ -271,7 +266,6 @@ class ReallySimpleCarousel {
     /*
     * carousel_caption_meta_box
     */
-  
     function carousel_caption_meta_box() {
         global $post;
         $carousel_caption = ( get_post_meta( $post->ID, '_rsc_carousel_caption', true ) ) ? get_post_meta( $post->ID, '_rsc_carousel_caption', true ) : '';
@@ -288,7 +282,6 @@ class ReallySimpleCarousel {
     /*
     * save_carousel
     */
- 
     function save_carousel( $post_id ) {
         // verify nonce
         if ( isset( $_POST['metabox_nonce'] ) && !wp_verify_nonce( $_POST['metabox_nonce'], basename(__FILE__) ) ) {
@@ -492,7 +485,6 @@ class ReallySimpleCarousel {
     /*
     * carousel_columns
     */
-
     function carousel_columns( $columns ) {
         $new = array();
         foreach( $columns as $key => $value ) {
@@ -509,7 +501,6 @@ class ReallySimpleCarousel {
     /*
     * carousel_custom_column
     */
-
     function carousel_custom_column( $column, $post_id ) {
         switch ( $column ) {
             case 'shortcode':
