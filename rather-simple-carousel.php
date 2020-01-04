@@ -1,14 +1,14 @@
 <?php
 /*
-Plugin Name: Really Simple Carousel
+Plugin Name: Rather Simple Carousel
 Version: v1.0
 Plugin URI:
 Author: Oscar Ciutat
 Author URI: http://oscarciutat.com/code/
-Description: A simple carousel
+Description: A really simple carousel
 */
 
-class ReallySimpleCarousel {
+class RatherSimpleCarousel {
 
     /**
      * Plugin instance.
@@ -90,7 +90,7 @@ class ReallySimpleCarousel {
      *
      */
     function load_language() {
-        load_plugin_textdomain( 'really-simple-carousel', '', dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        load_plugin_textdomain( 'rather-simple-carousel', '', dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
     
@@ -98,8 +98,8 @@ class ReallySimpleCarousel {
      * enqueue_scripts
      */
     function enqueue_scripts() {
-        wp_enqueue_style( 'really-simple-carousel-css', plugins_url( '/style.css', __FILE__), array( 'dashicons' ) );
-        wp_enqueue_script( 'really-simple-carousel-frontend', plugins_url( '/assets/js/frontend.js', __FILE__), array( 'jquery' ), false );
+        wp_enqueue_style( 'rather-simple-carousel-css', plugins_url( '/style.css', __FILE__), array( 'dashicons' ) );
+        wp_enqueue_script( 'rather-simple-carousel-frontend', plugins_url( '/assets/js/frontend.js', __FILE__), array( 'jquery' ), false );
     }
 
 
@@ -121,16 +121,16 @@ class ReallySimpleCarousel {
     function register_post_type() {
         
         $labels = array(
-            'name' => __( 'Carousels', 'really-simple-carousel' ),
-            'singular_name' => __( 'Carousel', 'really-simple-carousel' ),
-            'add_new' => __( 'Add New Carousel', 'really-simple-carousel' ),
-            'add_new_item' => __( 'Add New Carousel', 'really-simple-carousel' ),
-            'edit_item' => __( 'Edit Carousel', 'really-simple-carousel' ),
-            'new_item' => __( 'New Carousel', 'really-simple-carousel' ),
-            'view_item' => __( 'View Carousel', 'really-simple-carousel' ),
-            'search_items' => __( 'Search Carousels', 'really-simple-carousel' ),
-            'not_found' => __( 'No Carousels found', 'really-simple-carousel' ),
-            'not_found_in_trash' => __( 'No Carousels found in Trash', 'really-simple-carousel' )
+            'name' => __( 'Carousels', 'rather-simple-carousel' ),
+            'singular_name' => __( 'Carousel', 'rather-simple-carousel' ),
+            'add_new' => __( 'Add New Carousel', 'rather-simple-carousel' ),
+            'add_new_item' => __( 'Add New Carousel', 'rather-simple-carousel' ),
+            'edit_item' => __( 'Edit Carousel', 'rather-simple-carousel' ),
+            'new_item' => __( 'New Carousel', 'rather-simple-carousel' ),
+            'view_item' => __( 'View Carousel', 'rather-simple-carousel' ),
+            'search_items' => __( 'Search Carousels', 'rather-simple-carousel' ),
+            'not_found' => __( 'No Carousels found', 'rather-simple-carousel' ),
+            'not_found_in_trash' => __( 'No Carousels found in Trash', 'rather-simple-carousel' )
         );
       
         $args = array(
@@ -157,10 +157,10 @@ class ReallySimpleCarousel {
     * add_carousel_meta_boxes
     */
     function add_carousel_meta_boxes() {
-        add_meta_box( 'carousel-shortcode', __( 'Shortcode', 'really-simple-carousel' ), array( $this , 'carousel_shortcode_meta_box' ), 'carousel', 'side', 'low' );
-        add_meta_box( 'carousel-dimensions', __( 'Dimensions', 'really-simple-carousel' ), array( $this , 'carousel_dimensions_meta_box' ), 'carousel', 'side', 'low' );
-        add_meta_box( 'carousel-items', __( 'Carousel items', 'really-simple-carousel' ), array( $this , 'carousel_items_meta_box' ), 'carousel', 'normal', 'low' );
-        add_meta_box( 'carousel-caption', __( 'Caption', 'really-simple-carousel' ), array( $this , 'carousel_caption_meta_box' ), 'carousel', 'normal', 'low' );
+        add_meta_box( 'carousel-shortcode', __( 'Shortcode', 'rather-simple-carousel' ), array( $this , 'carousel_shortcode_meta_box' ), 'carousel', 'side', 'low' );
+        add_meta_box( 'carousel-dimensions', __( 'Dimensions', 'rather-simple-carousel' ), array( $this , 'carousel_dimensions_meta_box' ), 'carousel', 'side', 'low' );
+        add_meta_box( 'carousel-items', __( 'Carousel items', 'rather-simple-carousel' ), array( $this , 'carousel_items_meta_box' ), 'carousel', 'normal', 'low' );
+        add_meta_box( 'carousel-caption', __( 'Caption', 'rather-simple-carousel' ), array( $this , 'carousel_caption_meta_box' ), 'carousel', 'normal', 'low' );
     }
 
 
@@ -173,9 +173,9 @@ class ReallySimpleCarousel {
     ?>
         <div class="form-wrap">
         <div class="form-field">
-        <label for="carousel_get_shortcode"><?php _e( 'Your Shortcode:', 'really-simple-carousel' ); ?></label>
+        <label for="carousel_get_shortcode"><?php _e( 'Your Shortcode:', 'rather-simple-carousel' ); ?></label>
         <input readonly="true" id="carousel_get_shortcode" type="text" class="widefat" name="" value="<?php echo esc_attr( $shortcode ); ?>" />
-        <p><?php _e( 'Copy and paste this shortcode into your Post, Page or Custom Post editor.', 'really-simple-carousel' ); ?></p>
+        <p><?php _e( 'Copy and paste this shortcode into your Post, Page or Custom Post editor.', 'rather-simple-carousel' ); ?></p>
         </div>
         </div>
     <?php
@@ -191,9 +191,9 @@ class ReallySimpleCarousel {
     ?>
         <div class="form-wrap">
         <div class="form-field">
-        <label for="carousel_max_height"><?php _e( 'Max Height:', 'really-simple-carousel' ); ?></label>
+        <label for="carousel_max_height"><?php _e( 'Max Height:', 'rather-simple-carousel' ); ?></label>
         <input id="carousel_max_height" type="number" name="carousel_max_height" value="<?php echo esc_attr( $carousel_max_height ); ?>" min="100" max="600" />
-        <p><?php _e( 'Max height in pixels.', 'really-simple-carousel' ); ?></p>
+        <p><?php _e( 'Max height in pixels.', 'rather-simple-carousel' ); ?></p>
         </div>
         </div>
     <?php
@@ -236,7 +236,7 @@ class ReallySimpleCarousel {
                                 echo '<li class="image" data-attachment_id="' . esc_attr( $attachment_id ) . '">
                                     ' . $attachment . '
                                     <ul class="actions">
-                                        <li><a href="#" class="delete tips" data-tip="' . esc_attr__( 'Delete item', 'really-simple-carousel' ) . '">' . __( 'Delete', 'really-simple-carousel' ) . '</a></li>
+                                        <li><a href="#" class="delete tips" data-tip="' . esc_attr__( 'Delete item', 'rather-simple-carousel' ) . '">' . __( 'Delete', 'rather-simple-carousel' ) . '</a></li>
                                     </ul>
                                 </li>';
                                 // rebuild ids to be saved
@@ -257,7 +257,7 @@ class ReallySimpleCarousel {
 
         </div>
         <p class="add_carousel_images hide-if-no-js">
-            <a href="#" data-choose="<?php esc_attr_e( 'Add items to carousel', 'really-simple-carousel' ); ?>"><?php _e( 'Add carousel items', 'really-simple-carousel' ); ?></a>
+            <a href="#" data-choose="<?php esc_attr_e( 'Add items to carousel', 'rather-simple-carousel' ); ?>"><?php _e( 'Add carousel items', 'rather-simple-carousel' ); ?></a>
         </p>
         <?php
     }
@@ -364,7 +364,7 @@ class ReallySimpleCarousel {
                     
                 $html .= '</div>
                         </div>
-                          <div class="carousel-arrow left"></div>
+                        <div class="carousel-arrow left"></div>
                         <div class="carousel-arrow right"></div>
                         </div>
                         <div class="carousel-caption">' . wpautop( $carousel_caption ) . '</div>';
@@ -404,8 +404,8 @@ class ReallySimpleCarousel {
                 }
             </style>
             
-            <a href="#TB_inline?width=480&amp;inlineId=select-carousel" class="button thickbox insert-carousel" data-editor="<?php echo esc_attr( $editor_id ); ?>" title="<?php _e( 'Add a Carousel', 'really-simple-carousel' ); ?>">
-                <span class="wp-media-buttons-icon dashicons dashicons-format-image"></span><?php _e( ' Add Carousel', 'really-simple-carousel' ); ?>
+            <a href="#TB_inline?width=480&amp;inlineId=select-carousel" class="button thickbox insert-carousel" data-editor="<?php echo esc_attr( $editor_id ); ?>" title="<?php _e( 'Add a Carousel', 'rather-simple-carousel' ); ?>">
+                <span class="wp-media-buttons-icon dashicons dashicons-format-image"></span><?php _e( 'Add Carousel', 'rather-simple-carousel' ); ?>
             </a>
         <?php
 
@@ -437,7 +437,7 @@ class ReallySimpleCarousel {
 
                     // Display alert and bail if no slideshow was selected
                     if ( '-1' === id) {
-                        return alert("<?php _e( 'Please select a carousel', 'really-simple-carousel' ); ?>");
+                        return alert("<?php _e( 'Please select a carousel', 'rather-simple-carousel' ); ?>");
                     }
 
                     // Send shortcode to editor
@@ -451,19 +451,19 @@ class ReallySimpleCarousel {
 
             <div id="select-carousel" style="display: none;">
                 <div class="section">
-                    <h2><?php _e( 'Add a carousel', 'really-simple-carousel' ); ?></h2>
-                    <span><?php _e( 'Select a carousel to insert from the dropdown below:', 'really-simple-carousel' ); ?></span>
+                    <h2><?php _e( 'Add a carousel', 'rather-simple-carousel' ); ?></h2>
+                    <span><?php _e( 'Select a carousel to insert from the dropdown below:', 'rather-simple-carousel' ); ?></span>
                 </div>
 
                 <div class="section">
                     <select name="carousel" id="carousel">
-                        <option value="-1"><?php _e( 'Select a carousel', 'really-simple-carousel' ); ?></option>
+                        <option value="-1"><?php _e( 'Select a carousel', 'rather-simple-carousel' ); ?></option>
                         <?php
                             $args = array(
                                 'post_type'   => 'carousel',
                                 'numberposts' => -1,
                                 'orderby'     => 'ID',
-                                'order'          => 'DESC'
+                                'order'       => 'DESC'
                             );
                             $carousels = get_posts( $args );
                         ?>
@@ -474,8 +474,8 @@ class ReallySimpleCarousel {
                 </div>
 
                 <div class="section">
-                    <button id="insert-carousel" class="button-primary" onClick="insertCarousel();"><?php _e( 'Insert Carousel', 'really-simple-carousel' ); ?></button>
-                    <button id="close-carousel-thickbox" class="button-secondary" style="margin-left: 5px;" onClick="tb_remove();"><?php _e( 'Close', 'really-simple-carousel' ); ?></a>
+                    <button id="insert-carousel" class="button-primary" onClick="insertCarousel();"><?php _e( 'Insert Carousel', 'rather-simple-carousel' ); ?></button>
+                    <button id="close-carousel-thickbox" class="button-secondary" style="margin-left: 5px;" onClick="tb_remove();"><?php _e( 'Close', 'rather-simple-carousel' ); ?></a>
                 </div>
             </div>
         <?php
@@ -490,7 +490,7 @@ class ReallySimpleCarousel {
         foreach( $columns as $key => $value ) {
             if ( $key == 'date' ) {
                 // Put the Shortcode column before the Date column
-                $new['shortcode'] = __( 'Shortcode', 'really-simple-carousel' );
+                $new['shortcode'] = __( 'Shortcode', 'rather-simple-carousel' );
             }
             $new[$key] = $value;
         }
@@ -512,4 +512,4 @@ class ReallySimpleCarousel {
 
 }
 
-add_action( 'plugins_loaded', array ( ReallySimpleCarousel::get_instance(), 'plugin_setup' ) );
+add_action( 'plugins_loaded', array ( RatherSimpleCarousel::get_instance(), 'plugin_setup' ) );

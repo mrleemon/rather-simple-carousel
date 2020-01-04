@@ -1,4 +1,4 @@
-=== Really Simple Carousel ===
+=== Rather Simple Carousel ===
 Contributors: leemon
 Tags: carousel, images, media
 Requires at least: 4.0

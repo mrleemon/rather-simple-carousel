@@ -3,7 +3,7 @@ jQuery( function( $ ) {
     // carousel gallery file uploads.
     var carousel_gallery_frame;
     var $image_gallery_ids = $( '#carousel_items' );
-    var $carousel_images    = $( '#carousel_images_container' ).find( 'ul.carousel_images' );
+    var $carousel_images = $( '#carousel_images_container' ).find( 'ul.carousel_images' );
 
     $( '.add_carousel_images' ).on( 'click', 'a', function( event ) {
         var $el = $( this );
