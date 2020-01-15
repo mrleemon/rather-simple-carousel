@@ -476,8 +476,8 @@ class RatherSimpleCarousel {
                             $args = array(
                                 'post_type'   => 'carousel',
                                 'numberposts' => -1,
-                                'orderby'     => 'ID',
-                                'order'       => 'DESC'
+                                'orderby'     => 'title',
+                                'order'       => 'ASC'
                             );
                             $carousels = get_posts( $args );
                         ?>
