@@ -62,12 +62,15 @@ class RatherSimpleCarousel {
 
         add_action( 'init', array( $this, 'load_language' ) );
         add_action( 'init', array( $this, 'register_post_type' ) );
+        add_action( 'init', array( $this, 'register_block' ) );
+
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
         add_action( 'save_post_carousel', array( $this, 'save_carousel' ) );
         add_action( 'media_buttons', array( $this, 'display_button' ) );
+        add_filter( 'wp_editor_settings', array( $this, 'carousel_editor_settings' ) );
 
-        //columns
+        // Columns
         add_filter( 'manage_carousel_posts_columns', array( $this, 'carousel_columns' ) );
         add_action( 'manage_carousel_posts_custom_column',  array( $this, 'carousel_custom_column' ), 5, 2 );
 
@@ -112,7 +115,9 @@ class RatherSimpleCarousel {
      * enqueue_scripts
      */
     function enqueue_scripts() {
+        // Enqueue styles
         wp_enqueue_style( 'rather-simple-carousel-css', plugins_url( '/style.css', __FILE__), array( 'dashicons' ) );
+        // Enqueue scripts
         wp_enqueue_script( 'rather-simple-carousel-frontend', plugins_url( '/assets/js/frontend.js', __FILE__), array( 'jquery' ), false );
     }
 
@@ -125,7 +130,7 @@ class RatherSimpleCarousel {
         wp_enqueue_style( 'gallery-css', plugins_url( '/assets/css/carousel-gallery.css', __FILE__) );
         wp_enqueue_script( 'gallery-script', plugins_url( '/assets/js/carousel-gallery.js', __FILE__), array( 'jquery' ), false, true );
     }
-    
+
     
     /*
      * register_post_type
@@ -154,6 +159,7 @@ class RatherSimpleCarousel {
             'exclude_from_search' => true,
             'publicly_queryable' => false,
             'show_in_nav_menus' => false,
+            'show_in_rest' => true,
             'show_ui' => true,
             'menu_position' => 5,
             'menu_icon' => 'dashicons-images-alt2',
@@ -166,6 +172,25 @@ class RatherSimpleCarousel {
         
     }
 
+
+    /*
+    * Removes media buttons from carousel post type.
+    */
+    function carousel_editor_settings( $settings ) {
+        $current_screen = get_current_screen();
+
+        // Post types for which the media buttons should be removed.
+        $post_types = array( 'carousel' );
+
+        // Bail out if media buttons should not be removed for the current post type.
+        if ( ! $current_screen || ! in_array( $current_screen->post_type, $post_types, true ) ) {
+            return $settings;
+        }
+
+        $settings['media_buttons'] = false;
+
+        return $settings;
+    }
 
     /*
     * add_carousel_meta_boxes
@@ -298,7 +323,7 @@ class RatherSimpleCarousel {
     */
     function save_carousel( $post_id ) {
         // verify nonce
-        if ( isset( $_POST['metabox_nonce'] ) && !wp_verify_nonce( $_POST['metabox_nonce'], basename(__FILE__) ) ) {
+        if ( isset( $_POST['metabox_nonce'] ) && !wp_verify_nonce( $_POST['metabox_nonce'], basename( __FILE__ ) ) ) {
             return $post_id;
         }
     
@@ -322,13 +347,13 @@ class RatherSimpleCarousel {
             
             $carousel_max_height = isset( $_POST['carousel_max_height'] ) ? sanitize_text_field( $_POST['carousel_max_height'] ) : '300';
             update_post_meta( $post_id, '_rsc_carousel_max_height', $carousel_max_height );
-            
+
             $attachment_ids = isset( $_POST['carousel_items'] ) ? array_filter( explode( ',', sanitize_text_field( $_POST['carousel_items'] ) ) ) : array();
             update_post_meta( $post_id, '_rsc_carousel_items', implode( ',', $attachment_ids ) );
 
             $carousel_caption = isset( $_POST['carousel_caption'] ) ? sanitize_textarea_field( $_POST['carousel_caption'] ) : '';
             update_post_meta( $post_id, '_rsc_carousel_caption', $carousel_caption );
-            
+
         }
         
     }
@@ -350,7 +375,6 @@ class RatherSimpleCarousel {
         $atts = shortcode_atts( array(
             'id' => ''
         ), $attr, 'carousel' );
-        
         $id = $atts['id'];
 
         $html = '';
@@ -394,6 +418,7 @@ class RatherSimpleCarousel {
         }
 
         return $html;
+
     }
     
     
@@ -402,7 +427,7 @@ class RatherSimpleCarousel {
      *
      * @return void
      */
-     public function display_button() {
+    public function display_button() {
         // Print the button's HTML and CSS
         ?>
             <style type="text/css">
@@ -431,8 +456,7 @@ class RatherSimpleCarousel {
      *
      * @return void
      */
-    public function print_thickbox()
-    {
+    public function print_thickbox() {
         ?>
             <style type="text/css">
                 #TB_window .section {
@@ -522,6 +546,51 @@ class RatherSimpleCarousel {
                 echo $shortcode;
                 break;
         }
+    }
+
+
+    /**
+     * Registers block
+     *
+     * @since 1.0
+     *
+     */
+    function register_block() {
+
+        if ( ! function_exists( 'register_block_type' ) ) {
+            // The block editor is not active.
+            return;
+        }
+
+        wp_register_style(
+            'rather-simple-carousel-block-editor-css',
+            plugins_url( 'build/editor.css', __FILE__ ),
+            array( 'wp-edit-blocks' ),
+            filemtime( plugin_dir_path( __FILE__ ) . 'build/editor.css' )
+        );
+
+        wp_register_style(
+            'rather-simple-carousel-block-css',
+            plugins_url( 'build/style.css', __FILE__ ),
+            null,
+            filemtime( plugin_dir_path( __FILE__ ) . 'build/style.css' )
+        );
+        
+        wp_register_script(
+            'rather-simple-carousel-block',
+            plugins_url( 'build/index.js', __FILE__ ),
+            array( 'wp-blocks', 'wp-components', 'wp-data', 'wp-element', 'wp-i18n' ),
+            filemtime( plugin_dir_path( __FILE__ ) . 'build/index.js' )
+        );
+
+        register_block_type( 'occ/rather-simple-carousel', array(
+            'editor_style'  => 'rather-simple-carousel-block-editor-css',
+            'editor_script' => 'rather-simple-carousel-block',
+            'style' => 'rather-simple-carousel-block-css',
+        ) );
+
+        wp_set_script_translations( 'rather-simple-carousel-block', 'rather-simple-carousel', plugin_dir_path( __FILE__ ) . 'languages' );
+
     }
 
 }
