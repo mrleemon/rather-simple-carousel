@@ -324,17 +324,17 @@ class RatherSimpleCarousel {
     * save_carousel
     */
     function save_carousel( $post_id ) {
-        // verify nonce
+        // Verify nonce
         if ( !isset( $_POST['rsc_metabox_nonce'] ) || !wp_verify_nonce( $_POST['rsc_metabox_nonce'], basename( __FILE__ ) ) ) {
             return $post_id;
         }
     
-        // is autosave?
+        // Is autosave?
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
             return $post_id;
         }
 
-        // check permissions
+        // Check permissions
         if ( isset( $_POST['post_type'] ) ) {
             if ( 'page' == $_POST['post_type'] ) {
                 if ( !current_user_can( 'edit_page', $post_id ) ) {
