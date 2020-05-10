@@ -227,6 +227,7 @@ class RatherSimpleCarousel {
     function carousel_dimensions_meta_box() {
         global $post;
         $carousel_max_height = ( get_post_meta( $post->ID, '_rsc_carousel_max_height', true ) ) ? get_post_meta( $post->ID, '_rsc_carousel_max_height', true ) : '300';
+        wp_nonce_field( basename( __FILE__ ), 'rsc_metabox_nonce' );
     ?>
         <div class="form-wrap">
         <div class="form-field">
@@ -244,7 +245,7 @@ class RatherSimpleCarousel {
     */
     function carousel_items_meta_box() {
         global $post;
-        
+        wp_nonce_field( basename( __FILE__ ), 'rsc_metabox_nonce' );
     ?>
         <div id="carousel_images_container">
             <ul class="carousel_images">
@@ -308,6 +309,7 @@ class RatherSimpleCarousel {
     function carousel_caption_meta_box() {
         global $post;
         $carousel_caption = ( get_post_meta( $post->ID, '_rsc_carousel_caption', true ) ) ? get_post_meta( $post->ID, '_rsc_carousel_caption', true ) : '';
+        wp_nonce_field( basename( __FILE__ ), 'rsc_metabox_nonce' );
     ?>
         <div class="form-wrap">
         <div class="form-field">
@@ -323,7 +325,7 @@ class RatherSimpleCarousel {
     */
     function save_carousel( $post_id ) {
         // verify nonce
-        if ( isset( $_POST['metabox_nonce'] ) && !wp_verify_nonce( $_POST['metabox_nonce'], basename( __FILE__ ) ) ) {
+        if ( !isset( $_POST['rsc_metabox_nonce'] ) || !wp_verify_nonce( $_POST['rsc_metabox_nonce'], basename( __FILE__ ) ) ) {
             return $post_id;
         }
     
