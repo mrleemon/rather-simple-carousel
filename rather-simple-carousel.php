@@ -427,7 +427,7 @@ class RatherSimpleCarousel {
      *
      * @return void
      */
-    public function display_button() {
+    public function display_button( $editor_id = 'content' ) {
         // Print the button's HTML and CSS
         ?>
             <style type="text/css">
