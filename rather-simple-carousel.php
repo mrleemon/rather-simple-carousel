@@ -564,24 +564,33 @@ class RatherSimpleCarousel {
             return;
         }
 
+        $dir = dirname( __FILE__ );
+        $script_asset_path = "$dir/build/index.asset.php";
+        if ( ! file_exists( $script_asset_path ) ) {
+            throw new Error(
+                'You need to run `npm start` or `npm run build` for the block first.'
+            );
+        }
+        $script_asset = require( $script_asset_path );
+
         wp_register_style(
             'rather-simple-carousel-block-editor-css',
-            plugins_url( 'build/editor.css', __FILE__ ),
+            plugins_url( 'build/index.css', __FILE__ ),
             array( 'wp-edit-blocks' ),
-            filemtime( plugin_dir_path( __FILE__ ) . 'build/editor.css' )
+            filemtime( plugin_dir_path( __FILE__ ) . 'build/index.css' )
         );
 
         wp_register_style(
             'rather-simple-carousel-block-css',
-            plugins_url( 'build/style.css', __FILE__ ),
+            plugins_url( 'build/style-index.css', __FILE__ ),
             null,
-            filemtime( plugin_dir_path( __FILE__ ) . 'build/style.css' )
+            filemtime( plugin_dir_path( __FILE__ ) . 'build/style-index.css' )
         );
         
         wp_register_script(
             'rather-simple-carousel-block',
             plugins_url( 'build/index.js', __FILE__ ),
-            array( 'wp-blocks', 'wp-components', 'wp-data', 'wp-element', 'wp-i18n' ),
+            $script_asset['dependencies'],
             filemtime( plugin_dir_path( __FILE__ ) . 'build/index.js' )
         );
 
