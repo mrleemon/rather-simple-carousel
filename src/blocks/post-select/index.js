@@ -3,7 +3,7 @@
  */
 const { registerBlockType } = wp.blocks;
 const { G, Path, SVG, Placeholder, SelectControl } = wp.components;
-const { withSelect } = wp.data;
+const { useSelect } = wp.data;
 const { RawHTML } = wp.element;
 const { __ } = wp.i18n;
 
@@ -28,24 +28,23 @@ export const settings = {
     keywords: [ __( 'images', 'rather-simple-carousel' ), __( 'photos', 'rather-simple-carousel' ) ],
     attributes: blockAttributes,
 
-    edit: withSelect( ( select ) => {
-        return {
-            posts: select( 'core' ).getEntityRecords( 'postType', 'carousel', { per_page: -1, orderby: 'title',
-            order: 'asc', _fields: 'id,title' } )
-        };
-    } )
-    ( props => {
+    edit: ( props => {
         const { attributes, className } = props;
+
+        const posts = useSelect(
+            ( select ) => select( 'core' ).getEntityRecords( 'postType', 'carousel', { per_page: -1, orderby: 'title', order: 'asc', _fields: 'id,title' } ),
+            []
+        );
 
         const setID = value => {
             props.setAttributes( { id: Number( value ) } );
         };
 
-        if ( ! props.posts ) {
+        if ( ! posts ) {
             return __( 'Loading...', 'rather-simple-carousel' );
         }
 
-        if ( props.posts.length === 0 ) {
+        if ( posts.length === 0 ) {
             return __( 'No carousels found', 'rather-simple-carousel' );
         }
 
@@ -55,10 +54,10 @@ export const settings = {
             value: ''
         } );
 
-        for ( var i = 0; i < props.posts.length; i++ ) {
+        for ( var i = 0; i < posts.length; i++ ) {
             options.push( {
-                label: props.posts[i].title.raw,
-                value: props.posts[i].id
+                label: posts[i].title.raw,
+                value: posts[i].id
             } );
         }
 
