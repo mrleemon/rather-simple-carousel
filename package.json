@@ -4,19 +4,11 @@
   "license": "GPL-2.0-or-later",
   "main": "build/index.js",
   "dependencies": {
-    "classnames": "2.2.6"
+    "npm-check-updates": "^11.5.13"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^8.0.0",
-    "autoprefixer": "^9.7.6",
-    "css-loader": "^3.5.2",
-    "ignore-emit-webpack-plugin": "^2.0.2",
-    "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.1",
-    "path": "^0.12.7",
-    "po2json": "^1.0.0-beta-2",
-    "postcss-loader": "^3.0.0",
-    "sass-loader": "^8.0.2"
+    "@wordpress/scripts": "^16.0.0",
+    "po2json": "^1.0.0-beta-2"
   },
   "scripts": {
     "build": "wp-scripts build",
