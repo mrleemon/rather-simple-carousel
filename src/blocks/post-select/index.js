@@ -1,11 +1,11 @@
 /**
  * WordPress dependencies
  */
-const { registerBlockType } = wp.blocks;
-const { G, Path, SVG, Placeholder, SelectControl } = wp.components;
-const { useSelect } = wp.data;
-const { RawHTML } = wp.element;
-const { __ } = wp.i18n;
+import { registerBlockType } from '@wordpress/blocks';
+import { G, Path, SVG, Placeholder, SelectControl } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
+import { RawHTML } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
