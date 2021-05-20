@@ -3,6 +3,7 @@
 Plugin Name: Rather Simple Carousel
 Version: v1.0
 Plugin URI:
+Update URI: false
 Author: Oscar Ciutat
 Author URI: http://oscarciutat.com/code/
 Description: A really simple carousel
