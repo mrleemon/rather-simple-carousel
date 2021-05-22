@@ -33,7 +33,6 @@ class RatherSimpleCarousel {
      */
     protected static $instance = null;
 
-
     /**
      * Access this plugin’s working instance
      *
@@ -49,7 +48,6 @@ class RatherSimpleCarousel {
         return self::$instance;
 
     }
-
     
     /**
      * Used for regular plugin work.
@@ -81,7 +79,6 @@ class RatherSimpleCarousel {
         add_shortcode( 'carousel', array( $this, 'shortcode_carousel' ) );
     
     }
-
     
     /**
      * Constructor. Intentionally left empty and public.
@@ -91,15 +88,13 @@ class RatherSimpleCarousel {
      */
     public function __construct() {}
     
-    
-     /**
+    /**
      * Includes required core files used in admin and on the frontend.
      *
      * @since 1.0
      *
      */
     protected function includes() {}
-
 
     /**
      * Loads language
@@ -110,7 +105,6 @@ class RatherSimpleCarousel {
     function load_language() {
         load_plugin_textdomain( 'rather-simple-carousel', '', dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
-
     
     /**
      * enqueue_scripts
@@ -122,7 +116,6 @@ class RatherSimpleCarousel {
         wp_enqueue_script( 'rather-simple-carousel-frontend', plugins_url( '/assets/js/frontend.js', __FILE__), array( 'jquery' ), false );
     }
 
-
     /**
      * admin_enqueue_scripts
      */
@@ -131,9 +124,8 @@ class RatherSimpleCarousel {
         wp_enqueue_style( 'gallery-css', plugins_url( '/assets/css/carousel-gallery.css', __FILE__) );
         wp_enqueue_script( 'gallery-script', plugins_url( '/assets/js/carousel-gallery.js', __FILE__), array( 'jquery' ), false, true );
     }
-
     
-    /*
+    /**
      * register_post_type
      *
      * @since 1.0
@@ -173,10 +165,9 @@ class RatherSimpleCarousel {
         
     }
 
-
-    /*
-    * Removes media buttons from carousel post type.
-    */
+    /**
+     * Removes media buttons from carousel post type.
+     */
     function carousel_editor_settings( $settings ) {
         $current_screen = get_current_screen();
 
@@ -193,9 +184,9 @@ class RatherSimpleCarousel {
         return $settings;
     }
 
-    /*
-    * add_carousel_meta_boxes
-    */
+    /**
+     * add_carousel_meta_boxes
+     */
     function add_carousel_meta_boxes() {
         add_meta_box( 'carousel-shortcode', __( 'Shortcode', 'rather-simple-carousel' ), array( $this , 'carousel_shortcode_meta_box' ), 'carousel', 'side', 'low' );
         add_meta_box( 'carousel-dimensions', __( 'Dimensions', 'rather-simple-carousel' ), array( $this , 'carousel_dimensions_meta_box' ), 'carousel', 'side', 'low' );
@@ -203,10 +194,9 @@ class RatherSimpleCarousel {
         add_meta_box( 'carousel-caption', __( 'Caption', 'rather-simple-carousel' ), array( $this , 'carousel_caption_meta_box' ), 'carousel', 'normal', 'low' );
     }
 
-
-    /*
-    * carousel_shortcode_meta_box
-    */
+    /**
+     * carousel_shortcode_meta_box
+     */
     function carousel_shortcode_meta_box() {
         global $post;
         $shortcode = '[carousel id="' . $post->ID . '"]';
@@ -220,11 +210,10 @@ class RatherSimpleCarousel {
         </div>
     <?php
     }
-
     
-    /*
-    * carousel_dimensions_meta_box
-    */
+    /**
+     * carousel_dimensions_meta_box
+     */
     function carousel_dimensions_meta_box() {
         global $post;
         $carousel_max_height = ( get_post_meta( $post->ID, '_rsc_carousel_max_height', true ) ) ? get_post_meta( $post->ID, '_rsc_carousel_max_height', true ) : '300';
@@ -239,11 +228,10 @@ class RatherSimpleCarousel {
         </div>
     <?php
     }
-
     
-    /*
-    * carousel_items_meta_box
-    */
+    /**
+     * carousel_items_meta_box
+     */
     function carousel_items_meta_box() {
         global $post;
         wp_nonce_field( basename( __FILE__ ), 'rsc_metabox_nonce' );
@@ -303,10 +291,9 @@ class RatherSimpleCarousel {
         <?php
     }
 
-
-    /*
-    * carousel_caption_meta_box
-    */
+    /**
+     * carousel_caption_meta_box
+     */
     function carousel_caption_meta_box() {
         global $post;
         $carousel_caption = ( get_post_meta( $post->ID, '_rsc_carousel_caption', true ) ) ? get_post_meta( $post->ID, '_rsc_carousel_caption', true ) : '';
@@ -319,11 +306,10 @@ class RatherSimpleCarousel {
         </div>
     <?php
     }
-
     
-    /*
-    * save_carousel
-    */
+    /**
+     * save_carousel
+     */
     function save_carousel( $post_id ) {
         // Verify nonce
         if ( !isset( $_POST['rsc_metabox_nonce'] ) || !wp_verify_nonce( $_POST['rsc_metabox_nonce'], basename( __FILE__ ) ) ) {
@@ -360,7 +346,6 @@ class RatherSimpleCarousel {
         }
         
     }
-
     
     /**
      * shortcode_carousel
@@ -369,7 +354,6 @@ class RatherSimpleCarousel {
         $html = $this->shortcode_atts( $attr );
         return $html;
     }
-
     
     /**
      * shortcode_atts
@@ -423,8 +407,7 @@ class RatherSimpleCarousel {
         return $html;
 
     }
-    
-    
+   
     /**
      * Displays the media button
      *
@@ -452,7 +435,6 @@ class RatherSimpleCarousel {
         <?php
 
     }
-
     
     /**
      * Prints the thickbox for our media button
@@ -521,11 +503,10 @@ class RatherSimpleCarousel {
             </div>
         <?php
     }
-
     
-    /*
-    * carousel_columns
-    */
+    /**
+     * carousel_columns
+     */
     function carousel_columns( $columns ) {
         $new = array();
         foreach( $columns as $key => $value ) {
@@ -538,10 +519,9 @@ class RatherSimpleCarousel {
         return $new;
     }
 
-
-    /*
-    * carousel_custom_column
-    */
+    /**
+     * carousel_custom_column
+     */
     function carousel_custom_column( $column, $post_id ) {
         switch ( $column ) {
             case 'shortcode':
@@ -550,7 +530,6 @@ class RatherSimpleCarousel {
                 break;
         }
     }
-
 
     /**
      * Registers block
