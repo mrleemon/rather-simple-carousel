@@ -1,11 +1,14 @@
 <?php
 /*
 Plugin Name: Rather Simple Carousel
-Version: v1.0
 Plugin URI:
 Update URI: false
+Version: v1.0
+Requires at least: 5.3
+Requires PHP: 7.0
 Author: Oscar Ciutat
 Author URI: http://oscarciutat.com/code/
+Text Domain: rather-simple-carousel
 Description: A really simple carousel
 License: GPLv2 or later
 
