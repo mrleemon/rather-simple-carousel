@@ -4,10 +4,10 @@
   "license": "GPL-2.0-or-later",
   "main": "build/index.js",
   "dependencies": {
-    "npm-check-updates": "^11.5.13"
+    "npm-check-updates": "^11.6.0"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^16.0.0",
+    "@wordpress/scripts": "^16.1.1",
     "po2json": "^1.0.0-beta-2"
   },
   "scripts": {
