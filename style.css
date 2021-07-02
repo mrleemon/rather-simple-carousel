@@ -65,7 +65,6 @@
     top: 0;
     height: calc(100% - 30px);
     width: 30%;
-    -webkit-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
 }
 
@@ -81,27 +80,28 @@
     right: 0;
 }
 
-.carousel .carousel-arrow:before {
+.carousel .carousel-arrow .icon {
     position: absolute;
-    color: #fff;
-    display: inline-block;
-    font-family: "dashicons";
-    font-size: 50px;
+    display: flex;
+    align-items: center;
     top: 45%;
     width: 55px;
     height: 55px;
-    line-height: 1.1;
-    text-align: center;
     background: rgba(100, 100, 100, 0.3);
 }
 
-.carousel .carousel-arrow.left:before {
-    content: "\f141";
+.carousel .carousel-arrow .icon svg {
+    width: 60%;
+    height: 60%;
+    margin: 0 auto;
+    fill: #fff;
+}
+
+.carousel .carousel-arrow.left .icon {
     left: 0.5em;
 }
 
-.carousel .carousel-arrow.right:before {
-    content: "\f139";
+.carousel .carousel-arrow.right .icon {
     right: 0.5em;
 }
 
