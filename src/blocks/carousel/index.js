@@ -72,10 +72,10 @@ export const settings = {
 
         return (
             <Fragment>
-				<InspectorControls>
-					<PanelBody
-						title={ __( 'Settings', 'rather-simple-carousel' ) }
-					>
+                <InspectorControls>
+                    <PanelBody
+                        title={ __( 'Settings', 'rather-simple-carousel' ) }
+                    >
                         <SelectControl
                             label={ __( 'Select a carousel:', 'rather-simple-carousel' ) }
                             value={ attributes.id }
@@ -84,21 +84,19 @@ export const settings = {
                         />
                     </PanelBody>
                 </InspectorControls>
-				<Disabled>
-					<ServerSideRender
-						block="occ/rather-simple-carousel"
-						attributes={ attributes }
-						className={ className }
-					/>
-				</Disabled>
+                 <ServerSideRender
+                    block="occ/rather-simple-carousel"
+                    attributes={ attributes }
+                    className={ className }
+                />
             </Fragment>
         );
 
     } ),
 
     save: () => {
-		return null;
-	},
+        return null;
+    },
 
 };
 

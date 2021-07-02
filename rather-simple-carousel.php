@@ -377,6 +377,7 @@ class RatherSimpleCarousel {
      * carousel_markup
      */
     function carousel_markup( $id ) {
+        $html = '';
 
         $carousel_max_height = ( get_post_meta( $id, '_rsc_carousel_max_height', true ) ) ? get_post_meta( $id, '_rsc_carousel_max_height', true ) : '300';
         $carousel_items = get_post_meta( $id, '_rsc_carousel_items', true );
@@ -385,7 +386,7 @@ class RatherSimpleCarousel {
         $attachments = array_filter( explode( ',', $carousel_items ) );
         if ( ! empty( $attachments ) ) {
 
-            $html .= '<div id="carousel-' . esc_attr( $id ) . '" class="carousel">
+            $html .= '<div id="carousel-' . esc_attr( $id ) . '" class="wp-block wp-block-occ-carousel carousel">
                     <div class="carousel-wrapper">
                     <div class="carousel-frame">
                     <div class="carousel-items">';
@@ -607,7 +608,7 @@ class RatherSimpleCarousel {
         $html = '';
 
         if ( $attr['id'] ) {
-            $html = $this->carousel_markup( $id );
+            $html = $this->carousel_markup( $attr['id'] );
         }
 
         return $html;
