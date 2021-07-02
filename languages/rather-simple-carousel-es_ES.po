@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Rather Simple Carousel\n"
-"POT-Creation-Date: 2020-04-02 18:07+0200\n"
-"PO-Revision-Date: 2020-04-02 18:09+0200\n"
+"POT-Creation-Date: 2021-07-02 16:54+0200\n"
+"PO-Revision-Date: 2021-07-02 16:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: rather-simple-carousel.php\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -20,159 +20,163 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 
-#: rather-simple-carousel.php:143
+#: rather-simple-carousel.php:139
 msgid "Carousels"
 msgstr "Carruseles"
 
-#: rather-simple-carousel.php:144
+#: rather-simple-carousel.php:140
 msgid "Carousel"
 msgstr "Carrusel"
 
-#: rather-simple-carousel.php:145 rather-simple-carousel.php:146
+#: rather-simple-carousel.php:141 rather-simple-carousel.php:142
 msgid "Add New Carousel"
 msgstr "Añadir nuevo carrusel"
 
-#: rather-simple-carousel.php:147
+#: rather-simple-carousel.php:143
 msgid "Edit Carousel"
 msgstr "Editar carrusel"
 
-#: rather-simple-carousel.php:148
+#: rather-simple-carousel.php:144
 msgid "New Carousel"
 msgstr "Nuevo carrusel"
 
-#: rather-simple-carousel.php:149
+#: rather-simple-carousel.php:145
 msgid "View Carousel"
 msgstr "Ver carrusel"
 
-#: rather-simple-carousel.php:150
+#: rather-simple-carousel.php:146
 msgid "Search Carousels"
 msgstr "Buscar carruseles"
 
-#: rather-simple-carousel.php:151
+#: rather-simple-carousel.php:147
 msgid "No Carousels found"
 msgstr "No se han encontrado carruseles"
 
-#: rather-simple-carousel.php:152
+#: rather-simple-carousel.php:148
 msgid "No Carousels found in Trash"
 msgstr "No se han encontrado carruseles"
 
-#: rather-simple-carousel.php:199 rather-simple-carousel.php:531
+#: rather-simple-carousel.php:194 rather-simple-carousel.php:523
 msgid "Shortcode"
 msgstr ""
 
-#: rather-simple-carousel.php:200
+#: rather-simple-carousel.php:195
 msgid "Dimensions"
 msgstr "Dimensiones"
 
-#: rather-simple-carousel.php:201
+#: rather-simple-carousel.php:196
 msgid "Carousel items"
 msgstr "Elementos del carrusel"
 
-#: rather-simple-carousel.php:202
+#: rather-simple-carousel.php:197
 msgid "Caption"
 msgstr "Pie"
 
-#: rather-simple-carousel.php:215
+#: rather-simple-carousel.php:209
 msgid "Your Shortcode:"
 msgstr "Tu shortcode:"
 
-#: rather-simple-carousel.php:217
+#: rather-simple-carousel.php:211
 msgid ""
 "Copy and paste this shortcode into your Post, Page or Custom Post editor."
 msgstr ""
 "Copia y pega este código cuando edites una entrada, una página u otro "
 "contenido."
 
-#: rather-simple-carousel.php:233
+#: rather-simple-carousel.php:227
 msgid "Max Height:"
 msgstr "Altura máxima:"
 
-#: rather-simple-carousel.php:235
+#: rather-simple-carousel.php:229
 msgid "Max height in pixels."
 msgstr "Altura máxima en píxeles."
 
-#: rather-simple-carousel.php:278
+#: rather-simple-carousel.php:271
 msgid "Delete item"
 msgstr "Eliminar elemento"
 
-#: rather-simple-carousel.php:278
+#: rather-simple-carousel.php:271
 msgid "Delete"
 msgstr "Eliminar"
 
-#: rather-simple-carousel.php:299
+#: rather-simple-carousel.php:292
 msgid "Add items to carousel"
 msgstr "Añadir elementos al carrusel"
 
-#: rather-simple-carousel.php:299
+#: rather-simple-carousel.php:292
 msgid "Add carousel items"
 msgstr "Añadir elementos al carrusel"
 
-#: rather-simple-carousel.php:411
+#: rather-simple-carousel.php:408
 msgid "Edit"
 msgstr ""
 
-#: rather-simple-carousel.php:446
+#: rather-simple-carousel.php:440
 msgid "Add a Carousel"
 msgstr "Añadir un carrusel"
 
-#: rather-simple-carousel.php:447
+#: rather-simple-carousel.php:441
 msgid "Add Carousel"
 msgstr "Añadir carrusel"
 
-#: rather-simple-carousel.php:478
+#: rather-simple-carousel.php:471
 msgid "Please select a carousel"
 msgstr "Por favor, selecciona un carrusel"
 
-#: rather-simple-carousel.php:492
+#: rather-simple-carousel.php:485
 msgid "Add a carousel"
 msgstr "Añadir un carrusel"
 
-#: rather-simple-carousel.php:493
+#: rather-simple-carousel.php:486
 msgid "Select a carousel to insert from the dropdown below:"
 msgstr "Selecciona un carrusel a insertar del siguiente desplegable:"
 
-#: rather-simple-carousel.php:498
+#: rather-simple-carousel.php:491
 msgid "Select a carousel"
 msgstr "Seleccionar un carrusel"
 
-#: rather-simple-carousel.php:515
+#: rather-simple-carousel.php:508
 msgid "Insert Carousel"
 msgstr "Insertar carrusel"
 
-#: rather-simple-carousel.php:516
+#: rather-simple-carousel.php:509
 msgid "Close"
 msgstr "Cerrar"
 
 #. Plugin Name of the plugin/theme
-#: src/blocks/post-select/index.js:24 src/blocks/post-select/index.js:69
+#: src/blocks/carousel/index.js:33
 msgid "Rather Simple Carousel"
 msgstr ""
 
-#: src/blocks/post-select/index.js:25
+#: src/blocks/carousel/index.js:34
 msgid "Display a carousel."
 msgstr "Muestra un carrusel."
 
-#: src/blocks/post-select/index.js:28
+#: src/blocks/carousel/index.js:37
 msgid "images"
 msgstr "imágenes"
 
-#: src/blocks/post-select/index.js:28
+#: src/blocks/carousel/index.js:37
 msgid "photos"
 msgstr "fotos"
 
-#: src/blocks/post-select/index.js:45
+#: src/blocks/carousel/index.js:53
 msgid "Loading..."
 msgstr "Cargando..."
 
-#: src/blocks/post-select/index.js:49
+#: src/blocks/carousel/index.js:57
 msgid "No carousels found"
 msgstr "No se han encontrado carruseles"
 
-#: src/blocks/post-select/index.js:54
+#: src/blocks/carousel/index.js:62
 msgid "Select a carousel..."
 msgstr "Selecciona un carrusel..."
 
-#: src/blocks/post-select/index.js:72
+#: src/blocks/carousel/index.js:77
+msgid "Settings"
+msgstr "Ajustes"
+
+#: src/blocks/carousel/index.js:80
 msgid "Select a carousel:"
 msgstr "Seleccionar un carrusel:"
 

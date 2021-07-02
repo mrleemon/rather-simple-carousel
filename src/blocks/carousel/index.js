@@ -1,11 +1,20 @@
 /**
  * WordPress dependencies
  */
-import { registerBlockType } from '@wordpress/blocks';
-import { G, Path, SVG, Placeholder, SelectControl } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { RawHTML } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
+import {
+    G,
+    Path,
+    SVG,
+    Disabled,
+    PanelBody,
+    SelectControl,
+} from '@wordpress/components';
+import { InspectorControls } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { useSelect } from '@wordpress/data';
+import ServerSideRender from '@wordpress/server-side-render';
 
 /**
  * Internal dependencies
@@ -31,7 +40,7 @@ export const settings = {
     edit: ( props => {
         const { attributes, className } = props;
 
-        const posts = useSelect(
+        const carousels = useSelect(
             ( select ) => select( 'core' ).getEntityRecords( 'postType', 'carousel', { per_page: -1, orderby: 'title', order: 'asc', _fields: 'id,title' } ),
             []
         );
@@ -40,11 +49,11 @@ export const settings = {
             props.setAttributes( { id: Number( value ) } );
         };
 
-        if ( ! posts ) {
+        if ( ! carousels ) {
             return __( 'Loading...', 'rather-simple-carousel' );
         }
 
-        if ( posts.length === 0 ) {
+        if ( carousels.length === 0 ) {
             return __( 'No carousels found', 'rather-simple-carousel' );
         }
 
@@ -54,37 +63,42 @@ export const settings = {
             value: ''
         } );
 
-        for ( var i = 0; i < posts.length; i++ ) {
+        for ( var i = 0; i < carousels.length; i++ ) {
             options.push( {
-                label: posts[i].title.raw,
-                value: posts[i].id
+                label: carousels[i].title.raw,
+                value: carousels[i].id
             } );
         }
 
         return (
-            <Placeholder
-                key='rather-simple-carousel-block'
-                icon='images-alt2'
-                label={ __( 'Rather Simple Carousel', 'rather-simple-carousel' ) }
-                className={ className }>
-                    <SelectControl
-                        label={ __( 'Select a carousel:', 'rather-simple-carousel' ) }
-                        value={ attributes.id }
-                        options={ options }
-                        onChange={ setID }
-                    />
-            </Placeholder>
+            <Fragment>
+				<InspectorControls>
+					<PanelBody
+						title={ __( 'Settings', 'rather-simple-carousel' ) }
+					>
+                        <SelectControl
+                            label={ __( 'Select a carousel:', 'rather-simple-carousel' ) }
+                            value={ attributes.id }
+                            options={ options }
+                            onChange={ setID }
+                        />
+                    </PanelBody>
+                </InspectorControls>
+				<Disabled>
+					<ServerSideRender
+						block="occ/rather-simple-carousel"
+						attributes={ attributes }
+						className={ className }
+					/>
+				</Disabled>
+            </Fragment>
         );
 
     } ),
 
-    save( { attributes } ) {
-        const { id } = attributes;
-        var shortcode = '[carousel id="' + id + '"]';
-        return (
-            <RawHTML>{ shortcode }</RawHTML>
-        );
-    },
+    save: () => {
+		return null;
+	},
 
 };
 

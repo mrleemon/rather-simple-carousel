@@ -2,6 +2,6 @@
  * Internal dependencies
  */
 
-import './blocks/post-select';
+import './blocks/carousel';
 import './editor.scss';
 import './style.scss';
