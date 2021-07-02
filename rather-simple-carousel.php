@@ -68,6 +68,8 @@ class RatherSimpleCarousel {
 
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+        add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
+        
         add_action( 'save_post_carousel', array( $this, 'save_carousel' ) );
         add_action( 'media_buttons', array( $this, 'display_button' ) );
         add_filter( 'wp_editor_settings', array( $this, 'carousel_editor_settings' ) );
@@ -128,6 +130,16 @@ class RatherSimpleCarousel {
         wp_enqueue_script( 'gallery-script', plugins_url( '/assets/js/carousel-gallery.js', __FILE__), array( 'jquery' ), false, true );
     }
     
+    /**
+     * Enqueues block assets
+     *
+     * @since 1.0
+     */
+    function enqueue_block_editor_assets() {
+        // Load scripts
+        wp_enqueue_script( 'backend', plugins_url( '/assets/js/frontend.js', __FILE__ ), array( 'jquery' ), false, true );
+    }
+
     /**
      * register_post_type
      *
