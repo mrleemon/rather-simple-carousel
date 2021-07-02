@@ -400,8 +400,8 @@ class RatherSimpleCarousel {
                 
             $html .= '</div>
                     </div>
-                    <div class="carousel-arrow left"></div>
-                    <div class="carousel-arrow right"></div>
+                    <div class="carousel-arrow left"><span class="icon"><svg version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.5 5v14l-11-7z"/></svg></span></div>
+                    <div class="carousel-arrow right"><span class="icon"><svg version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m6.5 5v14l11-7z"/></svg></span></div>
                     </div>
                     <div class="carousel-caption">' . wpautop( $carousel_caption ) . '</div>';
             
