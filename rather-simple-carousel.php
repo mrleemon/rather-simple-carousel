@@ -137,7 +137,7 @@ class RatherSimpleCarousel {
      */
     function enqueue_block_editor_assets() {
         // Load scripts
-        wp_enqueue_script( 'backend', plugins_url( '/assets/js/frontend.js', __FILE__ ), array( 'jquery' ), false, true );
+        wp_enqueue_script( 'backend', plugins_url( '/assets/js/frontend.js', __FILE__ ), array( 'jquery' ), false );
     }
 
     /**
