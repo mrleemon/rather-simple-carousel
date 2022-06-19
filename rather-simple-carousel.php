@@ -29,11 +29,9 @@
  */
 
 /**
- * Core class used to implement the widget.
- *
- * @see WP_Widget
+ * Core class used to implement the plugin.
  */
-class RatherSimpleCarousel {
+class Rather_Simple_Carousel {
 
 	/**
 	 * Plugin instance.
@@ -636,4 +634,4 @@ class RatherSimpleCarousel {
 
 }
 
-add_action( 'plugins_loaded', array( RatherSimpleCarousel::get_instance(), 'plugin_setup' ) );
+add_action( 'plugins_loaded', array( Rather_Simple_Carousel::get_instance(), 'plugin_setup' ) );
