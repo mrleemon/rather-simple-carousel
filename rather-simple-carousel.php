@@ -24,6 +24,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * @package rather_simple_carousel
+ */
+
+/**
+ * Core class used to implement the widget.
+ *
+ * @see WP_Widget
  */
 class RatherSimpleCarousel {
 
@@ -91,11 +99,11 @@ class RatherSimpleCarousel {
 	 * Loads language
 	 */
 	public function load_language() {
-		load_plugin_textdomain( 'rather-simple-carousel', '', dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'rather-simple-carousel', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
-	 * enqueue_scripts
+	 * Enqueue scripts
 	 */
 	public function enqueue_scripts() {
 		// Enqueue styles.
@@ -105,7 +113,7 @@ class RatherSimpleCarousel {
 	}
 
 	/**
-	 * admin_enqueue_scripts
+	 * Admin enqueue scripts
 	 */
 	public function admin_enqueue_scripts() {
 		wp_enqueue_media();
@@ -115,8 +123,6 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Enqueues block assets
-	 *
-	 * @since 1.0
 	 */
 	public function enqueue_block_editor_assets() {
 		// Load scripts.
@@ -125,8 +131,6 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Register post type
-	 *
-	 * @since 1.0
 	 */
 	public function register_post_type() {
 
@@ -165,6 +169,8 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Removes media buttons from carousel post type
+	 *
+	 * @param array $settings  An array of editor arguments.
 	 */
 	public function carousel_editor_settings( $settings ) {
 		$current_screen = get_current_screen();
@@ -228,7 +234,7 @@ class RatherSimpleCarousel {
 	}
 
 	/**
-	 * carousel_items_meta_box
+	 * Carousel items meta box
 	 */
 	public function carousel_items_meta_box() {
 		global $post;
@@ -306,6 +312,8 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Save carousel
+	 *
+	 * @param integer $post_id  The post ID.
 	 */
 	public function save_carousel( $post_id ) {
 		// Verify nonce.
@@ -329,7 +337,7 @@ class RatherSimpleCarousel {
 			}
 		}
 
-		if ( isset( $_POST['post_type'] ) && ( 'carousel' == $_POST['post_type'] ) ) {
+		if ( isset( $_POST['post_type'] ) && ( 'carousel' === $_POST['post_type'] ) ) {
 
 			$carousel_max_height = isset( $_POST['carousel_max_height'] ) ? sanitize_text_field( $_POST['carousel_max_height'] ) : '300';
 			update_post_meta( $post_id, '_rsc_carousel_max_height', $carousel_max_height );
@@ -346,6 +354,8 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Shortcode carousel
+	 *
+	 * @param array $attr  The shortcode attributes.
 	 */
 	public function shortcode_carousel( $attr ) {
 		$html = $this->shortcode_atts( $attr );
@@ -354,6 +364,8 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Shortcode attributes
+	 *
+	 * @param array $attr  The shortcode attributes.
 	 */
 	public function shortcode_atts( $attr ) {
 		$atts = shortcode_atts(
@@ -373,6 +385,8 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Carousel markup
+	 *
+	 * @param integer $id  The carousel ID.
 	 */
 	public function carousel_markup( $id ) {
 		$html = '';
@@ -417,6 +431,8 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Displays the media button
+	 *
+	 * @param string $editor_id  Unique editor identifier, e.g. 'content'.
 	 */
 	public function display_button( $editor_id = 'content' ) {
 		// Print the button's HTML and CSS.
@@ -509,6 +525,8 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Carousel columns
+	 *
+	 * @param array $columns An associative array of column headings.
 	 */
 	public function carousel_columns( $columns ) {
 		$new = array();
@@ -524,6 +542,9 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Carousel custom column
+	 *
+	 * @param string  $column   The name of the column to display.
+	 * @param integer $post_id  The caroisel ID.
 	 */
 	public function carousel_custom_column( $column, $post_id ) {
 		switch ( $column ) {
@@ -536,6 +557,8 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Registers block
+	 *
+	 * @throws Error If block is not built.
 	 */
 	public function register_block() {
 
@@ -597,6 +620,9 @@ class RatherSimpleCarousel {
 
 	/**
 	 * Render block
+	 *
+	 * @param array  $attr     The block attributes.
+	 * @param string $content  The content.
 	 */
 	public function render_block( $attr, $content ) {
 		$html = '';
