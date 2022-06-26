@@ -105,9 +105,20 @@ class Rather_Simple_Carousel {
 	 */
 	public function enqueue_scripts() {
 		// Enqueue styles.
-		wp_enqueue_style( 'rather-simple-carousel-css', plugins_url( '/style.css', __FILE__ ), array( 'dashicons' ) );
+		wp_enqueue_style(
+			'rather-simple-carousel-css',
+			plugins_url( '/style.css', __FILE__ ),
+			array( 'dashicons' ),
+			filemtime( plugin_dir_path( __FILE__ ) . '/style.css' )
+		);
 		// Enqueue scripts.
-		wp_enqueue_script( 'rather-simple-carousel-frontend', plugins_url( '/assets/js/frontend.js', __FILE__ ), array( 'jquery' ), false );
+		wp_enqueue_script(
+			'rather-simple-carousel-frontend',
+			plugins_url( '/assets/js/frontend.js', __FILE__ ),
+			array( 'jquery' ),
+			filemtime( plugin_dir_path( __FILE__ ) . '/assets/js/frontend.js' ),
+			false
+		);
 	}
 
 	/**
@@ -115,8 +126,19 @@ class Rather_Simple_Carousel {
 	 */
 	public function admin_enqueue_scripts() {
 		wp_enqueue_media();
-		wp_enqueue_style( 'gallery-css', plugins_url( '/assets/css/carousel-gallery.css', __FILE__ ) );
-		wp_enqueue_script( 'gallery-script', plugins_url( '/assets/js/carousel-gallery.js', __FILE__ ), array( 'jquery' ), false, true );
+		wp_enqueue_style(
+			'gallery-css',
+			plugins_url( '/assets/css/carousel-gallery.css', __FILE__ ),
+			array(),
+			filemtime( plugin_dir_path( __FILE__ ) . '/assets/css/carousel-gallery.css' )
+		);
+		wp_enqueue_script(
+			'gallery-script',
+			plugins_url( '/assets/js/carousel-gallery.js', __FILE__ ),
+			array( 'jquery' ),
+			filemtime( plugin_dir_path( __FILE__ ) . '/assets/js/carousel-gallery.js' ),
+			true
+		);
 	}
 
 	/**
@@ -124,7 +146,13 @@ class Rather_Simple_Carousel {
 	 */
 	public function enqueue_block_editor_assets() {
 		// Load scripts.
-		wp_enqueue_script( 'backend', plugins_url( '/assets/js/frontend.js', __FILE__ ), array( 'jquery' ), false );
+		wp_enqueue_script(
+			'backend',
+			plugins_url( '/assets/js/frontend.js', __FILE__ ),
+			array( 'jquery' ),
+			filemtime( plugin_dir_path( __FILE__ ) . '/assets/js/frontend.js' ),
+			false
+		);
 	}
 
 	/**
@@ -542,7 +570,7 @@ class Rather_Simple_Carousel {
 	 * Carousel custom column
 	 *
 	 * @param string  $column   The name of the column to display.
-	 * @param integer $post_id  The caroisel ID.
+	 * @param integer $post_id  The carousel ID.
 	 */
 	public function carousel_custom_column( $column, $post_id ) {
 		switch ( $column ) {
