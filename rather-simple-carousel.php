@@ -3,7 +3,7 @@
  * Plugin Name: Rather Simple Carousel
  * Plugin URI:
  * Update URI: false
- * Version: v1.0
+ * Version: 1.0
  * Requires at least: 5.3
  * Requires PHP: 7.0
  * Author: Oscar Ciutat
