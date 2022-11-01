@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "occ/rather-simple-carousel",
+  "title": "Rather Simple Carousel",
+  "description": "Display a carousel.",
+  "textdomain": "rather-simple-carousel",
+  "category": "common",
+  "attributes": {
+    "id": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "supports": {
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "editorStyle": "file:./index.css"
+}

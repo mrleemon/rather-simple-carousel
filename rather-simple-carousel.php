@@ -4,7 +4,7 @@
  * Plugin URI:
  * Update URI: false
  * Version: 1.0
- * Requires at least: 5.3
+ * Requires at least: 5.8
  * Requires PHP: 7.0
  * Author: Oscar Ciutat
  * Author URI: http://oscarciutat.com/code/
@@ -587,6 +587,32 @@ class Rather_Simple_Carousel {
 	 * @throws Error If block is not built.
 	 */
 	public function register_block() {
+
+		if ( ! function_exists( 'register_block_type' ) ) {
+			// The block editor is not active.
+			return;
+		}
+
+		// Register the block by passing the location of block.json to register_block_type.
+		register_block_type(
+			__DIR__ . '/build/blocks/carousel',
+			array(
+				'render_callback' => array( $this, 'render_block' ),
+			)
+		);
+
+		// Load translations.
+		$script_handle = generate_block_asset_handle( 'occ/rather-simple-carousel', 'editorScript' );
+		wp_set_script_translations( $script_handle, 'rather-simple-carousel', plugin_dir_path( __FILE__ ) . 'languages' );
+
+	}
+
+	/**
+	 * Registers block
+	 *
+	 * @throws Error If block is not built.
+	 */
+	public function register_block_old() {
 
 		if ( ! function_exists( 'register_block_type' ) ) {
 			// The block editor is not active.

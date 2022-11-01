@@ -7,7 +7,6 @@ import {
     G,
     Path,
     SVG,
-    Disabled,
     PanelBody,
     SelectControl,
 } from '@wordpress/components';
@@ -15,27 +14,23 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
 import { useSelect } from '@wordpress/data';
 import ServerSideRender from '@wordpress/server-side-render';
+import metadata from "./block.json";
 
-/**
- * Internal dependencies
- */
+import './editor.scss';
+import './style.scss';
 
-const blockAttributes = {
-    id: {
-        type: 'integer',
-        default: 0,
-    },
-};
-
-export const name = 'occ/rather-simple-carousel';
+const { name } = metadata;
 
 export const settings = {
-    title: __( 'Rather Simple Carousel', 'rather-simple-carousel' ),
+    /*
+	title: __( 'Rather Simple Carousel', 'rather-simple-carousel' ),
     description: __( 'Display a carousel.', 'rather-simple-carousel' ),
-    icon: <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><Path fill="none" d="M0 0h24v24H0V0z" /><G><Path d="M20 4v12H8V4h12m0-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 9.67l1.69 2.26 2.48-3.1L19 15H9zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z" /></G></SVG>,
     category: 'common',
     keywords: [ __( 'images', 'rather-simple-carousel' ), __( 'photos', 'rather-simple-carousel' ) ],
     attributes: blockAttributes,
+	*/
+
+	icon: <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><Path fill="none" d="M0 0h24v24H0V0z" /><G><Path d="M20 4v12H8V4h12m0-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 9.67l1.69 2.26 2.48-3.1L19 15H9zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z" /></G></SVG>,
 
     edit: ( props => {
         const { attributes, className } = props;
