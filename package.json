@@ -4,11 +4,10 @@
   "license": "GPL-2.0-or-later",
   "main": "build/index.js",
   "dependencies": {
-    "npm-check-updates": "^16.2.1"
+    "npm-check-updates": "^16.3.16"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^24.1.0",
-	"dir-archiver": "^1.2.0",
+    "@wordpress/scripts": "^24.4.0",
     "po2json": "^1.0.0-beta-2"
   },
   "scripts": {
@@ -25,7 +24,6 @@
     "start": "wp-scripts start",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
-	"bundle": "dir-archiver --src . --dest ../rather-simple-carousel.zip --exclude .git .gitattributes .gitignore node_modules package-lock.json package.json",
-    "i18n": "po2json languages/rather-simple-carousel-es_ES.po languages/rather-simple-carousel-es_ES-rather-simple-carousel-block.json -f jed"
+    "i18n": "po2json languages/rather-simple-carousel-es_ES.po languages/rather-simple-carousel-es_ES-occ-rather-simple-carousel-editor-script.json -f jed"
   }
 }
