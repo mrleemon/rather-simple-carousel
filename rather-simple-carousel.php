@@ -117,7 +117,7 @@ class Rather_Simple_Carousel {
 			plugins_url( '/assets/js/frontend.js', __FILE__ ),
 			array( 'jquery' ),
 			filemtime( plugin_dir_path( __FILE__ ) . '/assets/js/frontend.js' ),
-			false
+			true
 		);
 	}
 
