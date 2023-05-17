@@ -1,54 +1,47 @@
-(function ($) {
+(function () {
 
-	$(function () {
+	document.addEventListener('DOMContentLoaded', function (e) {
 
-		$.fn.horizontal_carousel = function (options) {
+		horizontal_carousel = function (item, options) {
+			var defaults = { speed: 15 };
+			// Overwrite default values
+			var params = Object.assign(defaults, options)
 
-			var settings = $.extend({
-				speed: 600
-			}, options);
+			var speed = params.speed;
+			var container = item.querySelector('.carousel-frame');
+			var arrow_left = item.querySelector('.carousel-arrow.left');
+			var arrow_right = item.querySelector('.carousel-arrow.right');
 
-			var b = false;
-			var speed = settings.speed;
-			var container = $(this).find('.carousel-frame');
-			var arrow_left = $(this).find('.carousel-arrow.left');
-			var arrow_right = $(this).find('.carousel-arrow.right');
+			var idx;
 
-			arrow_left.on('mousemove', function (e) {
-				var direction = function () {
-					container.animate({ scrollLeft: '-=' + speed }, 1000, 'linear', direction);
-				}
-				if (b == false) {
-					b = true;
-					container.stop(true).animate({ scrollLeft: '-=' + speed }, 1000, 'linear', direction);
-				}
-			}).on('mouseleave', function () {
-				container.stop(true);
-				b = false;
+			arrow_left.addEventListener('mouseenter', function () {
+				idx = setInterval(function () {
+					container.scrollLeft -= speed
+				}, 10);
 			});
 
-			arrow_right.on('mousemove', function (e) {
-				var direction = function () {
-					container.animate({ scrollLeft: '+=' + speed }, 1000, 'linear', direction);
-				}
-				if (b == false) {
-					b = true;
-					container.stop(true).animate({ scrollLeft: '+=' + speed }, 1000, 'linear', direction);
-				}
-			}).on('mouseleave', function () {
-				container.stop(true);
-				b = false;
+			arrow_left.addEventListener('mouseleave', function () {
+				clearInterval(idx);
+			});
+
+			arrow_right.addEventListener('mouseenter', function () {
+				idx = setInterval(function () {
+					container.scrollLeft += speed
+				}, 10);
+			});
+
+			arrow_right.addEventListener('mouseleave', function () {
+				clearInterval(idx);
 			});
 
 		}
 
-		$('.carousel').each(function () {
-			$(this).horizontal_carousel({
-				speed: 500
+		document.querySelectorAll('.carousel').forEach(function (item) {
+			horizontal_carousel(item, {
+				speed: 10
 			});
 		});
 
 	});
 
-})(jQuery);
-
+})();
