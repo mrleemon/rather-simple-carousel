@@ -5,7 +5,7 @@
 	"title": "Rather Simple Carousel",
     "description": "Display a carousel.",
 	"textdomain": "rather-simple-carousel",
-	"category": "common",
+	"category": "media",
     "attributes": {
         "id": {
             "type": "integer",
