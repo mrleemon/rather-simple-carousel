@@ -14,7 +14,11 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
 import { useSelect } from '@wordpress/data';
 import ServerSideRender from '@wordpress/server-side-render';
-import metadata from "./block.json";
+
+/**
+ * Internal dependencies
+ */
+import metadata from './block.json';
 
 import './editor.scss';
 import './style.scss';
