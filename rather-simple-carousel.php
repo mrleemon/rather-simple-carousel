@@ -50,7 +50,6 @@ class Rather_Simple_Carousel {
 		}
 
 		return self::$instance;
-
 	}
 
 	/**
@@ -80,7 +79,6 @@ class Rather_Simple_Carousel {
 		add_action( 'admin_footer', array( $this, 'print_thickbox' ) );
 
 		add_shortcode( 'carousel', array( $this, 'shortcode_carousel' ) );
-
 	}
 
 	/**
@@ -190,7 +188,6 @@ class Rather_Simple_Carousel {
 		);
 
 		register_post_type( 'carousel', $args );
-
 	}
 
 	/**
@@ -343,7 +340,7 @@ class Rather_Simple_Carousel {
 	 */
 	public function save_carousel( $post_id ) {
 		// Verify nonce.
-		if ( ! isset( $_POST['rsc_metabox_nonce'] ) || ! wp_verify_nonce( $_POST['rsc_metabox_nonce'], basename( __FILE__ ) ) ) {
+		if ( ! isset( $_POST['rsc_metabox_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['rsc_metabox_nonce'] ), basename( __FILE__ ) ) ) {
 			return $post_id;
 		}
 
@@ -365,17 +362,16 @@ class Rather_Simple_Carousel {
 
 		if ( isset( $_POST['post_type'] ) && ( 'carousel' === $_POST['post_type'] ) ) {
 
-			$carousel_max_height = isset( $_POST['carousel_max_height'] ) ? sanitize_text_field( $_POST['carousel_max_height'] ) : '300';
+			$carousel_max_height = isset( $_POST['carousel_max_height'] ) ? sanitize_text_field( wp_unslash( $_POST['carousel_max_height'] ) ) : '300';
 			update_post_meta( $post_id, '_rsc_carousel_max_height', $carousel_max_height );
 
-			$attachment_ids = isset( $_POST['carousel_items'] ) ? array_filter( explode( ',', sanitize_text_field( $_POST['carousel_items'] ) ) ) : array();
+			$attachment_ids = isset( $_POST['carousel_items'] ) ? array_filter( explode( ',', sanitize_text_field( wp_unslash( $_POST['carousel_items'] ) ) ) ) : array();
 			update_post_meta( $post_id, '_rsc_carousel_items', implode( ',', $attachment_ids ) );
 
-			$carousel_caption = isset( $_POST['carousel_caption'] ) ? sanitize_textarea_field( $_POST['carousel_caption'] ) : '';
+			$carousel_caption = isset( $_POST['carousel_caption'] ) ? sanitize_textarea_field( wp_unslash( $_POST['carousel_caption'] ) ) : '';
 			update_post_meta( $post_id, '_rsc_carousel_caption', $carousel_caption );
 
 		}
-
 	}
 
 	/**
@@ -452,7 +448,6 @@ class Rather_Simple_Carousel {
 		}
 
 		return $html;
-
 	}
 
 	/**
@@ -480,7 +475,6 @@ class Rather_Simple_Carousel {
 				<span class="wp-media-buttons-icon dashicons dashicons-format-image"></span><?php _e( 'Add Carousel', 'rather-simple-carousel' ); ?>
 			</a>
 		<?php
-
 	}
 
 	/**
@@ -604,7 +598,6 @@ class Rather_Simple_Carousel {
 		// Load translations.
 		$script_handle = generate_block_asset_handle( 'occ/rather-simple-carousel', 'editorScript' );
 		wp_set_script_translations( $script_handle, 'rather-simple-carousel', plugin_dir_path( __FILE__ ) . 'languages' );
-
 	}
 
 	/**
@@ -619,7 +612,7 @@ class Rather_Simple_Carousel {
 			return;
 		}
 
-		$dir               = dirname( __FILE__ );
+		$dir               = __DIR__;
 		$script_asset_path = "$dir/build/index.asset.php";
 		if ( ! file_exists( $script_asset_path ) ) {
 			throw new Error(
@@ -667,16 +660,14 @@ class Rather_Simple_Carousel {
 		);
 
 		wp_set_script_translations( 'rather-simple-carousel-block', 'rather-simple-carousel', plugin_dir_path( __FILE__ ) . 'languages' );
-
 	}
 
 	/**
 	 * Render block
 	 *
-	 * @param array  $attr     The block attributes.
-	 * @param string $content  The content.
+	 * @param array $attr     The block attributes.
 	 */
-	public function render_block( $attr, $content ) {
+	public function render_block( $attr ) {
 		$html = '';
 
 		if ( $attr['id'] ) {
@@ -685,7 +676,6 @@ class Rather_Simple_Carousel {
 
 		return $html;
 	}
-
 }
 
 add_action( 'plugins_loaded', array( Rather_Simple_Carousel::get_instance(), 'plugin_setup' ) );
