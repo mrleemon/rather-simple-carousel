@@ -61,11 +61,9 @@ class Rather_Simple_Carousel {
 
 		add_action( 'init', array( $this, 'load_language' ) );
 		add_action( 'init', array( $this, 'register_post_type' ) );
-		add_action( 'init', array( $this, 'register_block' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 
 		add_action( 'save_post_carousel', array( $this, 'save_carousel' ) );
 		add_action( 'media_buttons', array( $this, 'display_button' ) );
@@ -136,20 +134,6 @@ class Rather_Simple_Carousel {
 			array( 'jquery' ),
 			filemtime( plugin_dir_path( __FILE__ ) . '/assets/js/carousel-gallery.js' ),
 			true
-		);
-	}
-
-	/**
-	 * Enqueues block assets
-	 */
-	public function enqueue_block_editor_assets() {
-		// Load scripts.
-		wp_enqueue_script(
-			'backend',
-			plugins_url( '/assets/js/frontend.js', __FILE__ ),
-			array( 'jquery' ),
-			filemtime( plugin_dir_path( __FILE__ ) . '/assets/js/frontend.js' ),
-			false
 		);
 	}
 
@@ -420,7 +404,7 @@ class Rather_Simple_Carousel {
 		$attachments = array_filter( explode( ',', $carousel_items ) );
 		if ( ! empty( $attachments ) ) {
 
-			$html .= '<div id="carousel-' . esc_attr( $id ) . '" class="wp-block wp-block-occ-carousel carousel">
+			$html .= '<div id="carousel-' . esc_attr( $id ) . '">
                     <div class="carousel-wrapper">
                     <div class="carousel-frame">
                     <div class="carousel-items">';
@@ -575,107 +559,6 @@ class Rather_Simple_Carousel {
 		}
 	}
 
-	/**
-	 * Registers block
-	 *
-	 * @throws Error If block is not built.
-	 */
-	public function register_block() {
-
-		if ( ! function_exists( 'register_block_type' ) ) {
-			// The block editor is not active.
-			return;
-		}
-
-		// Register the block by passing the location of block.json to register_block_type.
-		register_block_type(
-			__DIR__ . '/build/blocks/carousel',
-			array(
-				'render_callback' => array( $this, 'render_block' ),
-			)
-		);
-
-		// Load translations.
-		$script_handle = generate_block_asset_handle( 'occ/rather-simple-carousel', 'editorScript' );
-		wp_set_script_translations( $script_handle, 'rather-simple-carousel', plugin_dir_path( __FILE__ ) . 'languages' );
-	}
-
-	/**
-	 * Registers block
-	 *
-	 * @throws Error If block is not built.
-	 */
-	public function register_block_old() {
-
-		if ( ! function_exists( 'register_block_type' ) ) {
-			// The block editor is not active.
-			return;
-		}
-
-		$dir               = __DIR__;
-		$script_asset_path = "$dir/build/index.asset.php";
-		if ( ! file_exists( $script_asset_path ) ) {
-			throw new Error(
-				'You need to run `npm start` or `npm run build` for the block first.'
-			);
-		}
-		$script_asset = require $script_asset_path;
-
-		wp_register_style(
-			'rather-simple-carousel-block-editor-css',
-			plugins_url( 'build/index.css', __FILE__ ),
-			array( 'wp-edit-blocks' ),
-			filemtime( plugin_dir_path( __FILE__ ) . 'build/index.css' )
-		);
-
-		wp_register_style(
-			'rather-simple-carousel-block-css',
-			plugins_url( 'build/style-index.css', __FILE__ ),
-			null,
-			filemtime( plugin_dir_path( __FILE__ ) . 'build/style-index.css' )
-		);
-
-		wp_register_script(
-			'rather-simple-carousel-block',
-			plugins_url( 'build/index.js', __FILE__ ),
-			$script_asset['dependencies'],
-			filemtime( plugin_dir_path( __FILE__ ) . 'build/index.js' ),
-			true
-		);
-
-		register_block_type(
-			'occ/rather-simple-carousel',
-			array(
-				'editor_style'    => 'rather-simple-carousel-block-editor-css',
-				'style'           => 'rather-simple-carousel-block-css',
-				'editor_script'   => 'rather-simple-carousel-block',
-				'render_callback' => array( $this, 'render_block' ),
-				'attributes'      => array(
-					'id' => array(
-						'type'    => 'integer',
-						'default' => 0,
-					),
-				),
-			),
-		);
-
-		wp_set_script_translations( 'rather-simple-carousel-block', 'rather-simple-carousel', plugin_dir_path( __FILE__ ) . 'languages' );
-	}
-
-	/**
-	 * Render block
-	 *
-	 * @param array $attr     The block attributes.
-	 */
-	public function render_block( $attr ) {
-		$html = '';
-
-		if ( $attr['id'] ) {
-			$html = $this->carousel_markup( $attr['id'] );
-		}
-
-		return $html;
-	}
 }
 
 add_action( 'plugins_loaded', array( Rather_Simple_Carousel::get_instance(), 'plugin_setup' ) );
