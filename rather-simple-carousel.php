@@ -404,7 +404,7 @@ class Rather_Simple_Carousel {
 		$attachments = array_filter( explode( ',', $carousel_items ) );
 		if ( ! empty( $attachments ) ) {
 
-			$html .= '<div id="carousel-' . esc_attr( $id ) . '">
+			$html .= '<div id="carousel-' . esc_attr( $id ) . '" class="carousel">
                     <div class="carousel-wrapper">
                     <div class="carousel-frame">
                     <div class="carousel-items">';
