@@ -62,7 +62,7 @@ class Rather_Simple_Carousel {
 		add_action( 'init', array( $this, 'load_language' ) );
 		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'init', array( $this, 'register_meta_fields' ) );
-		
+
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
@@ -458,7 +458,7 @@ class Rather_Simple_Carousel {
 			foreach ( $attachments as $attachment_id ) {
 				if ( wp_attachment_is_image( $attachment_id ) ) {
 					$attachment = wp_get_attachment_image_src( $attachment_id, 'full' );
-					$html      .= '<div class="carousel-item"><img src="' . $attachment[0] . '" style="max-height: ' . $carousel_max_height . 'px;" /></div>';
+					$html      .= '<div class="carousel-item"><img src="' . esc_url( $attachment[0] ) . '" style="max-height: ' . esc_attr( $carousel_max_height ) . 'px;" /></div>';
 				}
 			}
 
@@ -604,7 +604,6 @@ class Rather_Simple_Carousel {
 				break;
 		}
 	}
-
 }
 
 add_action( 'plugins_loaded', array( Rather_Simple_Carousel::get_instance(), 'plugin_setup' ) );
