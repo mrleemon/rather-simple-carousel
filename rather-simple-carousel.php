@@ -61,7 +61,8 @@ class Rather_Simple_Carousel {
 
 		add_action( 'init', array( $this, 'load_language' ) );
 		add_action( 'init', array( $this, 'register_post_type' ) );
-
+		add_action( 'init', array( $this, 'register_meta_fields' ) );
+		
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
@@ -166,12 +167,57 @@ class Rather_Simple_Carousel {
 			'show_ui'              => true,
 			'menu_position'        => 5,
 			'menu_icon'            => 'dashicons-images-alt2',
-			'supports'             => array( 'title' ),
+			'supports'             => array( 'title', 'custom-fields' ),
 			'labels'               => $labels,
 			'register_meta_box_cb' => array( $this, 'add_carousel_meta_boxes' ),
 		);
 
 		register_post_type( 'carousel', $args );
+	}
+
+	/**
+	 * Registers meta fields
+	 */
+	public function register_meta_fields() {
+		// Register carousel meta fields.
+		register_post_meta(
+			'carousel',
+			'_rsc_carousel_caption',
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
+
+		register_post_meta(
+			'carousel',
+			'_rsc_carousel_max_height',
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
+
+		register_post_meta(
+			'carousel',
+			'_rsc_carousel_items',
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'array',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
 	}
 
 	/**
