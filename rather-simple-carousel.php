@@ -212,7 +212,7 @@ class Rather_Simple_Carousel {
 			array(
 				'show_in_rest'  => true,
 				'single'        => true,
-				'type'          => 'array',
+				'type'          => 'string',
 				'auth_callback' => function () {
 					return current_user_can( 'edit_posts' );
 				},
